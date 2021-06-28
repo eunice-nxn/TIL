@@ -1,0 +1,64 @@
+#System Programming Study_Day_1
+
+## 1 fread and fwrite
+
+     size_t fread (void* ptr, size_t size, size_t count, FILE* stream)
+     - It reads an array of elements whose size is 'count' and the size of each element is 'size'. It is from the locaton pointed by 'ptr' in the file 'stream'.
+     - Return Value: the size of elements read successfully
+     
+     size_t fwrite (const void* ptr, size_t size, size_t count, FILE* stream)
+     - It writes an array of elements whose size is 'count' and the size of each element is 'size'. It is from the locaton pointed by 'ptr' in the file 'stream'. 
+     - Return Value: the size of elements written successfully
+
+
+
+## 2 Stat System Call
+
+    The status of a file is checked through this system call.  
+    The stat() returns file attributes which is inode and contains metadata of the file.
+    
+      #include <sys/stat.h>
+      
+      int stat( const char *path, struct stat *buf)
+      - Return Value: 0 (Success), -1 (Fail)
+      - struct stat {
+          mode_t st_mode;
+          ino_t st_ino;
+          dev_t st_dev;
+          dev_t st_rdev;
+          nlink_t st_nlink;
+          uid_t st_uid;
+          gid_t st_gid;
+          off_t st_size;
+          struct timspec st_atim;
+          struct timespec st_mtim;
+          struct timespec st_ctim;
+          blksize_t st_blksize;
+          blkcnt_t st_blocks;
+       }
+      
+     - Especially, to retrieve the files or subdirectories, It is critical that the symbolic link or other special files should be excluded.
+       'st_mode' is used as the key of considering this requirement. In addition, there are flags for representing different kind of file.
+       
+           S_IFMT : A bitmask used to get mode value of a file
+           S_IFSOCK: A file constant of socket
+           S_IFLNK: A file constant of symbolic link
+           S_IFREG: A file constant for regular file
+           S_IFBLK: A file constant for block file
+           S_IFDIR: A file constant for directory file
+           S_IFCHR: A file constant for character file
+           S_IFIFO: A file constant for fifo
+
+
+
+##3 diary
+
+    - I want to expand the power of metacognition. 
+      I think it is critical to be able to distinguish what I know and what I don't know in learning.
+      In this sense, it is very useful to explain my code to professor and peers. 
+      Through the review of code, it gets to be straightforward that what is a contradiction or an ambiguity of logic in my code.
+      Furthermore, I can get new insight of programming through feedback of other people.
+    - As soon as the study was over, I was exhausted and fell asleep. 
+      I was worried about concentration because I participated online.
+      However, I was thankful that I was able to concentrate while receiving moderate stress, because it was a pretty intense schedule.
+      
